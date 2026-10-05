@@ -1,0 +1,319 @@
+/* ── Page Shell ─────────────────────────────────────────────────── */
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  animation: fadeIn 300ms ease;
+  max-width: 1100px;
+}
+
+.header {}
+.title {
+  font-size: var(--text-h2);
+  font-weight: 800;
+  color: var(--neutral-800);
+  letter-spacing: -0.03em;
+}
+.subtitle {
+  color: var(--neutral-500);
+  font-size: var(--text-body-sm);
+  margin-top: var(--space-1);
+}
+
+/* ── Layout ─────────────────────────────────────────────────────── */
+.layout {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: var(--space-5);
+  align-items: start;
+}
+@media (max-width: 768px) {
+  .layout { grid-template-columns: 1fr; }
+}
+
+/* ── Left Nav ───────────────────────────────────────────────────── */
+.nav {
+  background: white;
+  border: 1px solid var(--neutral-100);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  box-shadow: var(--shadow-xs);
+  display: flex;
+  flex-direction: column;
+}
+
+.navItem {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  text-align: left;
+  border-bottom: 1px solid var(--neutral-50);
+  transition: all var(--transition-fast);
+  position: relative;
+}
+.navItem:last-child { border-bottom: none; }
+.navItem:hover { background: var(--neutral-50); }
+.navItemActive { background: var(--primary-50) !important; }
+.navItemActive::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 6px;
+  bottom: 6px;
+  width: 3px;
+  background: var(--primary-600);
+  border-radius: 0 3px 3px 0;
+}
+
+.navIcon {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-md);
+  background: var(--neutral-100);
+  color: var(--neutral-500);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all var(--transition-fast);
+}
+.navIconActive {
+  background: var(--primary-100);
+  color: var(--primary-600);
+}
+
+.navText {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+.navLabel {
+  font-size: var(--text-body-sm);
+  font-weight: 600;
+  color: var(--neutral-700);
+}
+.navItemActive .navLabel { color: var(--primary-700); }
+.navDesc {
+  font-size: 11px;
+  color: var(--neutral-400);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.navChevron { color: var(--neutral-300); flex-shrink: 0; }
+
+/* ── Right Panel ────────────────────────────────────────────────── */
+.panel {
+  background: white;
+  border: 1px solid var(--neutral-100);
+  border-radius: var(--radius-xl);
+  padding: var(--space-6);
+  box-shadow: var(--shadow-xs);
+  min-height: 500px;
+}
+
+/* ── Shared section helpers ─────────────────────────────────────── */
+.sectionTitle {
+  font-size: var(--text-h3);
+  font-weight: 700;
+  color: var(--neutral-800);
+  letter-spacing: -0.02em;
+  margin-bottom: var(--space-1);
+}
+.sectionSubtitle {
+  font-size: var(--text-body-sm);
+  color: var(--neutral-500);
+  margin-bottom: var(--space-5);
+}
+.divider {
+  border: none;
+  border-top: 1px solid var(--neutral-100);
+  margin: var(--space-5) 0;
+}
+
+/* ── Form helpers (shared by all sections) ──────────────────────── */
+.formRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-4);
+  margin-bottom: var(--space-4);
+}
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+.formLabel {
+  font-size: var(--text-body-sm);
+  font-weight: 600;
+  color: var(--neutral-700);
+}
+.formHint {
+  font-size: var(--text-caption);
+  color: var(--neutral-400);
+}
+.formInput, .formSelect, .formTextarea {
+  border: 1px solid var(--neutral-200);
+  border-radius: var(--radius-lg);
+  padding: var(--space-2) var(--space-3);
+  font-size: var(--text-body-sm);
+  color: var(--neutral-700);
+  background: var(--neutral-50);
+  outline: none;
+  width: 100%;
+  transition: all var(--transition-fast);
+  font-family: var(--font-sans);
+}
+.formInput:focus, .formSelect:focus, .formTextarea:focus {
+  border-color: var(--primary-400);
+  background: white;
+  box-shadow: var(--shadow-glow);
+}
+.formTextarea { resize: vertical; line-height: 1.6; min-height: 80px; }
+
+.saveBtn {
+  margin-top: var(--space-5);
+}
+
+/* ── Color swatch ───────────────────────────────────────────────── */
+.colorRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+.colorPreview {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-md);
+  border: 2px solid var(--neutral-200);
+  flex-shrink: 0;
+}
+.colorInput {
+  flex: 1;
+}
+
+/* ── Key / Webhook table ────────────────────────────────────────── */
+.tableWrap {
+  border: 1px solid var(--neutral-100);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  margin-top: var(--space-4);
+}
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.table th {
+  font-size: var(--text-caption);
+  font-weight: 700;
+  color: var(--neutral-500);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: var(--space-3) var(--space-4);
+  background: var(--neutral-50);
+  border-bottom: 1px solid var(--neutral-100);
+  text-align: left;
+}
+.table td {
+  padding: var(--space-3) var(--space-4);
+  font-size: var(--text-body-sm);
+  color: var(--neutral-700);
+  border-bottom: 1px solid var(--neutral-50);
+  vertical-align: middle;
+}
+.table tr:last-child td { border-bottom: none; }
+.table tr:hover td { background: var(--neutral-50); }
+
+.mono {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  background: var(--neutral-100);
+  padding: 2px 8px;
+  border-radius: var(--radius-sm);
+  color: var(--neutral-600);
+}
+.deleteBtn {
+  color: var(--danger-500);
+  font-size: var(--text-caption);
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: var(--radius-md);
+  transition: all var(--transition-fast);
+}
+.deleteBtn:hover { background: var(--danger-50); }
+
+/* ── Empty state ────────────────────────────────────────────────── */
+.emptyState {
+  text-align: center;
+  padding: var(--space-10) var(--space-6);
+  color: var(--neutral-400);
+}
+.emptyIcon {
+  width: 48px;
+  height: 48px;
+  background: var(--neutral-100);
+  border-radius: var(--radius-xl);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto var(--space-3);
+  color: var(--neutral-400);
+}
+.emptyState p { font-size: var(--text-body-sm); }
+
+/* ── Key reveal ─────────────────────────────────────────────────── */
+.keyRevealBox {
+  background: var(--neutral-900);
+  border-radius: var(--radius-lg);
+  padding: var(--space-4);
+  margin-top: var(--space-4);
+}
+.keyRevealLabel {
+  font-size: var(--text-caption);
+  color: var(--neutral-400);
+  margin-bottom: var(--space-2);
+}
+.keyRevealValue {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: #A3E635;
+  word-break: break-all;
+  line-height: 1.6;
+}
+.keyRevealWarning {
+  font-size: var(--text-caption);
+  color: var(--warning-400);
+  margin-top: var(--space-2);
+}
+
+/* ── Audit Log ──────────────────────────────────────────────────── */
+.auditRow {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  padding: var(--space-3) 0;
+  border-bottom: 1px solid var(--neutral-50);
+}
+.auditRow:last-child { border-bottom: none; }
+.auditDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--primary-400);
+  margin-top: 5px;
+  flex-shrink: 0;
+}
+.auditAction {
+  font-size: var(--text-body-sm);
+  font-weight: 600;
+  color: var(--neutral-700);
+}
+.auditMeta {
+  font-size: var(--text-caption);
+  color: var(--neutral-400);
+  margin-top: 2px;
+}

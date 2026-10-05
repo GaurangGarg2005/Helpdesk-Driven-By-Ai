@@ -1,0 +1,224 @@
+COMPANY HELPDESK POLICY & SUPPORT GUIDE
+========================================
+Last Updated: August 2026
+
+---
+
+SECTION 1: REFUND & RETURN POLICY
+-----------------------------------
+We offer a full 30-day money-back guarantee on all purchases. If you are not satisfied with your purchase for any reason, you may request a refund within 30 days of the original purchase date.
+
+How to get a refund:
+- Contact our support team with your order ID and the reason for your refund request.
+- Refunds are processed within 5-7 business days back to your original payment method.
+- For subscription plans, refunds are prorated based on the unused portion of your billing cycle.
+- Digital products and one-time setup fees are non-refundable after 30 days.
+- If your account was charged in error, we will issue a full refund immediately upon verification.
+
+Can I get a refund? Yes, absolutely. If you are within the 30-day window, simply provide your order ID and we will process your refund without any questions asked.
+
+---
+
+SECTION 2: BILLING & PAYMENTS
+-------------------------------
+We accept all major credit cards (Visa, Mastercard, American Express), PayPal, and bank transfers for annual plans.
+
+Billing cycle options:
+- Monthly billing: Charged on the same date every month.
+- Annual billing: Charged once per year at a discounted rate (save 20%).
+- Invoices are sent automatically via email on each billing date.
+
+If you see an unexpected charge:
+- Log into your account and check the Billing section for a full breakdown.
+- Common reasons include plan upgrades, overage charges, or renewal fees.
+- If a charge is not recognized, contact us within 60 days and we will investigate immediately.
+- Disputed charges are resolved within 3-5 business days.
+
+How to cancel your subscription:
+- Go to Settings > Billing > Cancel Subscription.
+- Your access continues until the end of the current billing period.
+- We do not charge cancellation fees.
+
+---
+
+SECTION 3: SHIPPING & DELIVERY
+--------------------------------
+For physical product orders, we offer the following shipping options:
+
+Standard Shipping: 5-7 business days (free for orders over $50)
+Express Shipping: 2-3 business days ($9.99)
+Overnight Shipping: Next business day ($24.99)
+
+Tracking your order:
+- A tracking number is emailed to you within 24 hours of dispatch.
+- You can track your order at any time from your account under Orders.
+- If your order has not arrived within the expected window, contact us and we will open an investigation with the carrier.
+
+International shipping:
+- We ship to over 50 countries. Delivery times vary by destination (7-21 business days).
+- Import duties and taxes are the responsibility of the recipient.
+- We are not responsible for delays caused by customs clearance.
+
+---
+
+SECTION 4: ACCOUNT & LOGIN ISSUES
+------------------------------------
+Forgot your password:
+- Click "Forgot Password" on the login page and enter your registered email address.
+- A password reset link will be sent to you within 2 minutes.
+- If you do not receive the email, check your spam/junk folder.
+- Password reset links expire after 24 hours.
+
+Account locked:
+- Accounts are locked after 5 consecutive failed login attempts for security.
+- Wait 15 minutes and try again, or use the "Forgot Password" link to reset.
+- Contact support if your account is permanently locked.
+
+Changing your email or account details:
+- Go to Settings > Profile to update your name, email, or phone number.
+- Email changes require verification of the new email address.
+- For security reasons, password changes require confirmation of your current password.
+
+Two-factor authentication (2FA):
+- We strongly recommend enabling 2FA in Settings > Security.
+- Supported methods: SMS, authenticator apps (Google Authenticator, Authy).
+- If you lose access to your 2FA device, contact support with your account ID for manual verification.
+
+---
+
+SECTION 5: TECHNICAL SUPPORT & TROUBLESHOOTING
+------------------------------------------------
+Common issues and solutions:
+
+App not loading or showing a blank screen:
+- Clear your browser cache and cookies, then refresh the page.
+- Try a different browser (Chrome, Firefox, Edge are fully supported).
+- Disable browser extensions, especially ad blockers, which may interfere.
+- Check our status page at status.helpdeskai.com for any ongoing incidents.
+
+Slow performance:
+- Ensure your internet connection is stable (minimum 5 Mbps recommended).
+- Close unused browser tabs to free up memory.
+- Contact support if the issue persists for more than 30 minutes.
+
+Error messages:
+- If you see a 500 Internal Server Error, this is on our end. Our team is automatically notified and will fix it within 2 hours.
+- If you see a 403 Forbidden error, your account may lack the required permissions. Contact your administrator.
+- For any other error, take a screenshot and send it to support@helpdeskai.com with a description of what you were doing.
+
+Data not saving:
+- Ensure you are clicking the Save button after making changes.
+- Check if you have a stable internet connection.
+- If data was lost due to a system error, contact us immediately. We retain backups for 30 days.
+
+---
+
+SECTION 6: PLANS & PRICING
+-----------------------------
+We offer three pricing tiers:
+
+Starter Plan - $29/month
+- Up to 3 agents
+- 500 tickets/month
+- Email support channel
+- Basic AI responses
+- 5 GB storage
+
+Professional Plan - $79/month
+- Up to 15 agents
+- Unlimited tickets
+- Email, chat, and phone channels
+- Advanced AI with RAG (document-based answers)
+- 50 GB storage
+- Priority support
+
+Enterprise Plan - Custom pricing
+- Unlimited agents
+- Unlimited tickets
+- All channels including social media
+- Custom AI training on your company data
+- Dedicated account manager
+- SLA guarantees
+- 500 GB storage
+
+Upgrading your plan:
+- You can upgrade at any time from Settings > Billing.
+- Upgrades take effect immediately and you are charged the prorated difference.
+
+Downgrading your plan:
+- Downgrades take effect at the start of your next billing cycle.
+- You will retain access to premium features until the end of the current period.
+
+---
+
+SECTION 7: PRIVACY & DATA SECURITY
+-------------------------------------
+We take data security very seriously. All data is encrypted in transit (TLS 1.3) and at rest (AES-256).
+
+Data retention:
+- Active account data is retained as long as your account is active.
+- After account deletion, data is permanently purged within 30 days.
+- You can request a full export of your data at any time from Settings > Privacy.
+
+GDPR compliance:
+- We are fully GDPR compliant for customers in the European Union.
+- You have the right to access, correct, or delete your personal data at any time.
+- Submit a Data Subject Access Request (DSAR) via our privacy portal or email privacy@helpdeskai.com.
+
+We do not sell your data to third parties. We use data only to provide and improve our service.
+
+---
+
+SECTION 8: CONTACTING SUPPORT
+-------------------------------
+Support channels and hours:
+
+Live Chat: Available Monday to Friday, 9 AM to 6 PM (EST)
+Email: support@helpdeskai.com — responses within 24 hours
+Phone: +1-800-HELPDESK — available for Professional and Enterprise plans
+Community Forum: community.helpdeskai.com — 24/7 peer-to-peer support
+
+For urgent issues (system outages, data loss, security incidents):
+- Use Live Chat and mark your issue as "Urgent"
+- Enterprise customers have a dedicated emergency hotline
+
+Response time SLAs:
+- Starter: 24 hours for email
+- Professional: 4 hours for chat, 8 hours for email
+- Enterprise: 1 hour for all channels
+
+---
+
+SECTION 9: FEATURE REQUESTS & FEEDBACK
+-----------------------------------------
+We love hearing from our users! To submit a feature request:
+- Visit our roadmap at roadmap.helpdeskai.com and vote on existing requests.
+- Submit new ideas directly from within the app via Help > Suggest a Feature.
+- Our product team reviews all suggestions monthly.
+- Highly upvoted features are added to our development roadmap.
+
+We publish a changelog at changelog.helpdeskai.com with every new release.
+
+---
+
+SECTION 10: CANCELLATION & ACCOUNT DELETION
+----------------------------------------------
+Cancelling your subscription:
+- Go to Settings > Billing > Cancel Plan.
+- Cancellation takes effect at the end of your current billing period.
+- You will not be charged further after cancellation.
+- Your data remains accessible until the end of the billing period.
+
+Deleting your account:
+- Go to Settings > Account > Delete Account.
+- Account deletion is permanent and cannot be undone.
+- All data associated with your account will be deleted within 30 days.
+- Make sure to export any important data before deleting.
+
+Reactivating a cancelled account:
+- You can reactivate your account within 30 days of cancellation by logging in and choosing a plan.
+- After 30 days, you will need to create a new account.
+
+---
+
+END OF POLICY DOCUMENT

@@ -1,0 +1,141 @@
+/* Auth page shared styles */
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  animation: fadeInUp 400ms ease;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.logoBadge {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-xl);
+  background: linear-gradient(135deg, var(--primary-600), var(--accent-600));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  margin-bottom: var(--space-2);
+}
+
+.title {
+  font-size: var(--text-display-sm);
+  font-weight: 800;
+  color: white;
+  letter-spacing: -0.04em;
+  line-height: 1.1;
+}
+
+.subtitle {
+  font-size: var(--text-body);
+  color: var(--neutral-500);
+}
+
+/* Form */
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-3);
+}
+
+.fieldGroup {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: var(--text-body-sm);
+  font-weight: 500;
+  color: var(--neutral-400);
+}
+
+.required { color: var(--danger-500); }
+
+.inputWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.inputIcon {
+  position: absolute;
+  left: 12px;
+  color: var(--neutral-500);
+  pointer-events: none;
+  flex-shrink: 0;
+}
+
+.input {
+  width: 100%;
+  height: 42px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: var(--radius-lg);
+  padding: 0 var(--space-5) 0 var(--space-8);
+  color: white;
+  font-size: var(--text-body-sm);
+  transition: all var(--transition-fast);
+  outline: none;
+}
+
+.input::placeholder { color: var(--neutral-600); }
+
+.input:focus {
+  background: rgba(255,255,255,0.08);
+  border-color: var(--primary-500);
+  box-shadow: 0 0 0 3px rgba(99,102,241,0.2);
+}
+
+.eyeBtn {
+  position: absolute;
+  right: 12px;
+  color: var(--neutral-500);
+  display: flex;
+  align-items: center;
+  transition: color var(--transition-fast);
+}
+.eyeBtn:hover { color: var(--neutral-300); }
+
+.forgotLink {
+  font-size: var(--text-caption);
+  color: var(--primary-400);
+  font-weight: 400;
+}
+.forgotLink:hover { color: var(--primary-300); }
+
+.terms {
+  font-size: var(--text-caption);
+  color: var(--neutral-600);
+  text-align: center;
+  line-height: 1.5;
+}
+.terms a { color: var(--primary-400); }
+
+/* Switch */
+.switchText {
+  text-align: center;
+  font-size: var(--text-body-sm);
+  color: var(--neutral-500);
+}
+
+.switchLink {
+  color: var(--primary-400);
+  font-weight: 600;
+}
+.switchLink:hover { color: var(--primary-300); }

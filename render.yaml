@@ -1,0 +1,164 @@
+services:
+  # ── AI Service ─────────────────────────────────────────────────────
+  - type: web
+    name: helpdeskAi-ai-service
+    runtime: python
+    region: singapore
+    plan: starter
+    rootDir: ai-service
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: GEMINI_API_KEY
+        sync: false
+
+  # ── Auth Service ────────────────────────────────────────────────────
+  - type: web
+    name: helpdeskAi-auth-service
+    runtime: java
+    region: singapore
+    plan: starter
+    rootDir: backend
+    buildCommand: ./mvnw clean package -pl auth-service -am -DskipTests
+    startCommand: java -jar auth-service/target/auth-service-*.jar
+    envVars:
+      - key: SPRING_DATASOURCE_URL
+        fromDatabase:
+          name: helpdeskAi-postgres
+          property: connectionString
+      - key: JWT_SECRET
+        sync: false
+      - key: SERVER_PORT
+        value: "8081"
+
+  # ── Org Service ─────────────────────────────────────────────────────
+  - type: web
+    name: helpdeskAi-org-service
+    runtime: java
+    region: singapore
+    plan: starter
+    rootDir: backend
+    buildCommand: ./mvnw clean package -pl org-service -am -DskipTests
+    startCommand: java -jar org-service/target/org-service-*.jar
+    envVars:
+      - key: SPRING_DATASOURCE_URL
+        fromDatabase:
+          name: helpdeskAi-postgres
+          property: connectionString
+      - key: JWT_SECRET
+        sync: false
+      - key: SERVER_PORT
+        value: "8082"
+
+  # ── Ticket Service ──────────────────────────────────────────────────
+  - type: web
+    name: helpdeskAi-ticket-service
+    runtime: java
+    region: singapore
+    plan: starter
+    rootDir: backend
+    buildCommand: ./mvnw clean package -pl ticket-service -am -DskipTests
+    startCommand: java -jar ticket-service/target/ticket-service-*.jar
+    envVars:
+      - key: SPRING_DATASOURCE_URL
+        fromDatabase:
+          name: helpdeskAi-postgres
+          property: connectionString
+      - key: JWT_SECRET
+        sync: false
+      - key: AI_SERVICE_URL
+        fromService:
+          name: helpdeskAi-ai-service
+          type: web
+          envVarKey: RENDER_INTERNAL_HOSTNAME
+      - key: SERVER_PORT
+        value: "8083"
+
+  # ── Chat Service ────────────────────────────────────────────────────
+  - type: web
+    name: helpdeskAi-chat-service
+    runtime: java
+    region: singapore
+    plan: starter
+    rootDir: backend
+    buildCommand: ./mvnw clean package -pl chat-service -am -DskipTests
+    startCommand: java -jar chat-service/target/chat-service-*.jar
+    envVars:
+      - key: SPRING_DATASOURCE_URL
+        fromDatabase:
+          name: helpdeskAi-postgres
+          property: connectionString
+      - key: JWT_SECRET
+        sync: false
+      - key: SERVER_PORT
+        value: "8084"
+
+  # ── KB Service ──────────────────────────────────────────────────────
+  - type: web
+    name: helpdeskAi-kb-service
+    runtime: java
+    region: singapore
+    plan: starter
+    rootDir: backend
+    buildCommand: ./mvnw clean package -pl kb-service -am -DskipTests
+    startCommand: java -jar kb-service/target/kb-service-*.jar
+    envVars:
+      - key: SPRING_DATASOURCE_URL
+        fromDatabase:
+          name: helpdeskAi-postgres
+          property: connectionString
+      - key: JWT_SECRET
+        sync: false
+      - key: SERVER_PORT
+        value: "8085"
+
+  # ── Analytics Service ────────────────────────────────────────────────
+  - type: web
+    name: helpdeskAi-analytics-service
+    runtime: java
+    region: singapore
+    plan: starter
+    rootDir: backend
+    buildCommand: ./mvnw clean package -pl analytics-service -am -DskipTests
+    startCommand: java -jar analytics-service/target/analytics-service-*.jar
+    envVars:
+      - key: SPRING_DATASOURCE_URL
+        fromDatabase:
+          name: helpdeskAi-postgres
+          property: connectionString
+      - key: JWT_SECRET
+        sync: false
+      - key: SERVER_PORT
+        value: "8086"
+
+  # ── Notification Service ─────────────────────────────────────────────
+  - type: web
+    name: helpdeskAi-notification-service
+    runtime: java
+    region: singapore
+    plan: starter
+    rootDir: backend
+    buildCommand: ./mvnw clean package -pl notification-service -am -DskipTests
+    startCommand: java -jar notification-service/target/notification-service-*.jar
+    envVars:
+      - key: SPRING_DATASOURCE_URL
+        fromDatabase:
+          name: helpdeskAi-postgres
+          property: connectionString
+      - key: JWT_SECRET
+        sync: false
+      - key: MAIL_USERNAME
+        sync: false
+      - key: MAIL_PASSWORD
+        sync: false
+      - key: BASE_URL
+        sync: false
+      - key: SERVER_PORT
+        value: "8087"
+
+databases:
+  - name: helpdeskAi-postgres
+    databaseName: helpdeskAi
+    user: helpdeskAi_user
+    region: singapore
+    plan: starter

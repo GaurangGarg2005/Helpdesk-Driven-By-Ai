@@ -1,0 +1,25 @@
+server:
+  port: 8086
+
+spring:
+  application:
+    name: analytics-service
+  datasource:
+    url: jdbc:postgresql://localhost:5432/helpdesk_analytics
+    username: postgres
+    password: postgres
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+
+jwt:
+  secret: helpdeskAiSecretKeyThatIsLongEnoughForHmacSha256AlgorithmRequires32Bytes!!
+  access-token-expiry: 900000
+  refresh-token-expiry: 604800000
+
+# URL of ticket-service for data aggregation
+ticket-service:
+  url: http://localhost:8083

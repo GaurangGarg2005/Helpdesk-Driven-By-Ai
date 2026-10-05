@@ -1,0 +1,32 @@
+# Multi-stage Spring Boot Dockerfile — used by every service
+# Build context should be the service directory (e.g. ./backend/auth-service)
+
+FROM eclipse-temurin:21-jdk-alpine AS builder
+WORKDIR /build
+
+# Copy parent pom + common module first for layer caching
+COPY ../../pom.xml ./pom.xml
+COPY ../../common ./common
+
+# Copy this service's source
+COPY . .
+
+RUN ./mvnw -pl . -am -DskipTests package || \
+    (mvn -B -pl . -am -DskipTests package 2>&1 || true)
+
+# ─────────────────────────────────────────
+
+FROM eclipse-temurin:21-jre-alpine
+WORKDIR /app
+
+RUN addgroup -S spring && adduser -S spring -G spring
+USER spring
+
+COPY --from=builder /build/target/*.jar app.jar
+
+EXPOSE 8080
+
+ENTRYPOINT ["java", \
+  "-XX:MaxRAMPercentage=75", \
+  "-XX:+UseG1GC", \
+  "-jar", "app.jar"]

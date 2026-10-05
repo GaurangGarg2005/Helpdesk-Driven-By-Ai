@@ -1,0 +1,239 @@
+# ─────────────────────────────────────────────────────────────────
+#  HelpDeskAI — Local Development Docker Compose
+#  Usage: docker compose up -d
+# ─────────────────────────────────────────────────────────────────
+
+# Global DNS fix — ensures all containers and build stages can resolve DNS
+x-dns: &dns
+  dns:
+    - 8.8.8.8
+    - 8.8.4.4
+
+services:
+
+  # ── Infrastructure ─────────────────────────────────────────────
+
+  postgres:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    <<: *dns
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./scripts/init-db.sql:/docker-entrypoint-initdb.d/init-db.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7-alpine
+    restart: unless-stopped
+    <<: *dns
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+  # ── AI Service ─────────────────────────────────────────────────
+
+  ai-service:
+    build:
+      context: ./ai-service
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    <<: *dns
+    ports:
+      - "8000:8000"
+    environment:
+      - GEMINI_API_KEY=${GEMINI_API_KEY}
+      - RAG_INDEX_DIR=/app/rag_indexes
+    volumes:
+      - rag_indexes:/app/rag_indexes
+    depends_on:
+      - postgres
+
+  # ── Spring Boot Microservices ──────────────────────────────────
+
+  auth-service:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+      args:
+        SERVICE_NAME: auth-service
+    restart: unless-stopped
+    <<: *dns
+    ports:
+      - "8081:8081"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/helpdesk_auth
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: postgres
+      JWT_SECRET: helpdeskAiSecretKeyThatIsLongEnoughForHmacSha256AlgorithmRequires32Bytes!!
+      SERVER_PORT: 8081
+      OWNER_EMAIL: owner@helpdeskai.com
+      OWNER_PASSWORD: HelpDesk@Owner2024
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+
+  org-service:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+      args:
+        SERVICE_NAME: org-service
+    restart: unless-stopped
+    <<: *dns
+    ports:
+      - "8082:8082"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/helpdesk_org
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: postgres
+      JWT_SECRET: helpdeskAiSecretKeyThatIsLongEnoughForHmacSha256AlgorithmRequires32Bytes!!
+      SERVER_PORT: 8082
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  ticket-service:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+      args:
+        SERVICE_NAME: ticket-service
+    restart: unless-stopped
+    <<: *dns
+    ports:
+      - "8083:8083"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/helpdesk_tickets
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: postgres
+      JWT_SECRET: helpdeskAiSecretKeyThatIsLongEnoughForHmacSha256AlgorithmRequires32Bytes!!
+      AI_SERVICE_URL: http://ai-service:8000
+      SERVER_PORT: 8083
+    depends_on:
+      postgres:
+        condition: service_healthy
+      ai-service:
+        condition: service_started
+
+  chat-service:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+      args:
+        SERVICE_NAME: chat-service
+    restart: unless-stopped
+    <<: *dns
+    ports:
+      - "8084:8084"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/helpdesk_chat
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: postgres
+      JWT_SECRET: helpdeskAiSecretKeyThatIsLongEnoughForHmacSha256AlgorithmRequires32Bytes!!
+      SERVER_PORT: 8084
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  kb-service:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+      args:
+        SERVICE_NAME: kb-service
+    restart: unless-stopped
+    <<: *dns
+    ports:
+      - "8085:8085"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/helpdesk_kb
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: postgres
+      JWT_SECRET: helpdeskAiSecretKeyThatIsLongEnoughForHmacSha256AlgorithmRequires32Bytes!!
+      AI_SERVICE_BASE_URL: http://ai-service:8000
+      SERVER_PORT: 8085
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  analytics-service:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+      args:
+        SERVICE_NAME: analytics-service
+    restart: unless-stopped
+    <<: *dns
+    ports:
+      - "8086:8086"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/helpdesk_analytics
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: postgres
+      JWT_SECRET: helpdeskAiSecretKeyThatIsLongEnoughForHmacSha256AlgorithmRequires32Bytes!!
+      TICKET_SERVICE_URL: http://ticket-service:8083
+      SERVER_PORT: 8086
+    depends_on:
+      postgres:
+        condition: service_healthy
+      ticket-service:
+        condition: service_started
+
+  notification-service:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+      args:
+        SERVICE_NAME: notification-service
+    restart: unless-stopped
+    <<: *dns
+    ports:
+      - "8087:8087"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/helpdesk_notifications
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: postgres
+      JWT_SECRET: helpdeskAiSecretKeyThatIsLongEnoughForHmacSha256AlgorithmRequires32Bytes!!
+      MAIL_USERNAME: ${MAIL_USERNAME:-noreply@helpdeskAi.com}
+      MAIL_PASSWORD: ${MAIL_PASSWORD:-changeme}
+      BASE_URL: ${BASE_URL:-http://localhost:3000}
+      SERVER_PORT: 8087
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  # ── Frontend (React + Nginx) ──────────────────────────────────
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    <<: *dns
+    ports:
+      - "3000:80"
+    depends_on:
+      - auth-service
+      - ticket-service
+      - kb-service
+
+volumes:
+  postgres_data:
+  redis_data:
+  rag_indexes:

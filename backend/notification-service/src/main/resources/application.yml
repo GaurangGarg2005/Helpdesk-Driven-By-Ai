@@ -1,0 +1,37 @@
+server:
+  port: 8087
+
+spring:
+  application:
+    name: notification-service
+  datasource:
+    url: jdbc:postgresql://localhost:5432/helpdesk_notifications
+    username: postgres
+    password: postgres
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: ${MAIL_USERNAME:noreply@helpdeskAi.com}
+    password: ${MAIL_PASSWORD:changeme}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+
+jwt:
+  secret: helpdeskAiSecretKeyThatIsLongEnoughForHmacSha256AlgorithmRequires32Bytes!!
+  access-token-expiry: 900000
+  refresh-token-expiry: 604800000
+
+notification:
+  from-name: HelpDeskAI
+  from-email: ${MAIL_USERNAME:noreply@helpdeskAi.com}
+  base-url: ${BASE_URL:http://localhost:3000}

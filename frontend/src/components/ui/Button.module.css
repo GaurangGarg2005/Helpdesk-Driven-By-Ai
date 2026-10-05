@@ -1,0 +1,96 @@
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  font-weight: 600;
+  border-radius: var(--radius-lg);
+  transition: all var(--transition-fast);
+  white-space: nowrap;
+  position: relative;
+  cursor: pointer;
+  border: 1px solid transparent;
+  letter-spacing: -0.01em;
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* Sizes */
+.sm  { height: 30px; padding: 0 var(--space-3); font-size: var(--text-caption); }
+.md  { height: 38px; padding: 0 var(--space-4); font-size: var(--text-body-sm); }
+.lg  { height: 44px; padding: 0 var(--space-5); font-size: var(--text-body); }
+
+/* Variants */
+.primary {
+  background: var(--primary-600);
+  color: white;
+  border-color: var(--primary-600);
+}
+.primary:hover {
+  background: var(--primary-700);
+  border-color: var(--primary-700);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(79,70,229,0.35);
+}
+.primary:active { transform: translateY(0); box-shadow: none; }
+
+.secondary {
+  background: white;
+  color: var(--neutral-700);
+  border-color: var(--neutral-200);
+  box-shadow: var(--shadow-xs);
+}
+.secondary:hover {
+  background: var(--neutral-50);
+  border-color: var(--neutral-300);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-sm);
+}
+.secondary:active { transform: translateY(0); }
+
+.ghost {
+  background: transparent;
+  color: var(--neutral-600);
+}
+.ghost:hover {
+  background: var(--neutral-100);
+  color: var(--neutral-800);
+}
+
+.danger {
+  background: var(--danger-600);
+  color: white;
+  border-color: var(--danger-600);
+}
+.danger:hover {
+  background: var(--danger-700);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(220,38,38,0.3);
+}
+
+.ai {
+  background: linear-gradient(135deg, var(--accent-600), var(--primary-600));
+  color: white;
+  border-color: transparent;
+}
+.ai:hover {
+  opacity: 0.92;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(20,184,166,0.35);
+}
+
+/* Icons */
+.icon { display: flex; align-items: center; }
+
+/* Spinner */
+.spinner {
+  width: 14px;
+  height: 14px;
+  border: 2px solid rgba(255,255,255,0.3);
+  border-top-color: white;
+  border-radius: 50%;
+}
